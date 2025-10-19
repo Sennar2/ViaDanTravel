@@ -1,0 +1,70 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand variables */
+:root{
+  --coral:#ff6f61;
+  --teal:#12b5a4;
+  --navy:#0b132b;
+  --cream:#fff7f0;
+  --brand-gradient:linear-gradient(180deg,#fff8f3 0%,#ffffff 100%);
+}
+
+/* Helpers moved under utilities so they're always kept */
+@layer utilities{
+  .container{@apply max-w-6xl mx-auto px-4}
+  .bg-cream{background:var(--cream)}
+  .text-navy{color:var(--navy)}
+  .text-coral{color:var(--coral)}
+  .text-slate{color:#667085}
+  .font-brand{ font-family: var(--font-brand), ui-serif, Georgia, serif; }
+}
+
+/* POPPIER SLOGAN */
+.slogan{
+  @apply tracking-tight font-black leading-tight;
+  font-family: var(--font-brand), ui-serif, Georgia, serif;
+}
+
+/* Components */
+@layer components{
+  .card{
+    @apply bg-white rounded-2xl p-5 md:p-6 border border-gray-200 shadow-sm
+           transition-transform duration-200 ease-out;
+  }
+  .card:hover{
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 25px 40px -20px rgba(11,19,43,.25);
+  }
+
+  .btn{
+    @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 text-sm font-medium transition;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{ @apply text-white; background-color:var(--navy); }
+  .btn-primary:hover{ filter:brightness(.95); transform: translateY(-1px); }
+  .btn-outline{ @apply border text-sm; border-color:#cbd5e1; color:var(--navy); }
+  .btn-outline:hover{ background:rgba(0,0,0,.04); transform: translateY(-1px); }
+
+  /* Optional: reusable focus ring for buttons/inputs */
+  .focus-ring{ @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--teal)] focus-visible:ring-offset-2; }
+}
+
+/* ===== Highlighter marker effect ===== */
+@layer utilities{
+  .hi{ position:relative; display:inline-block; padding:0 .25rem; isolation:isolate; }
+  .hi::before{
+    content:""; position:absolute; left:-2px; right:-2px; bottom:.05rem; height:58%;
+    background: var(--hi-color, var(--coral)); opacity:.35; border-radius:.4rem;
+    transform: rotate(-1.5deg) skewX(-6deg); z-index:-1;
+  }
+  .hi-coral{ --hi-color: var(--coral); }
+  .hi-teal{ --hi-color: var(--teal); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .card,.btn{ transition:none !important; transform:none !important; }
+}

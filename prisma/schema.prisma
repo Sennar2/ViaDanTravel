@@ -1,0 +1,93 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  // App runtime (pooled PgBouncer URL)
+  url       = env("DATABASE_URL")
+  // CLI/migrations (direct URL, no PgBouncer)
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+model Itinerary {
+  id           Int      @id @default(autoincrement())
+  slug         String   @unique
+  title        String
+  nights       Int
+  priceFromGBP Int
+  summary      String
+  // Use JSON to store arrays
+  bullets      Json
+  highlights   Json
+  heroEmoji    String?
+  region       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([region])
+  @@index([createdAt])
+}
+
+model NewsImage {
+  id        String   @id @default(cuid())
+  filename  String
+  mimeType  String
+  size      Int
+  bytes     Bytes
+  createdAt DateTime @default(now())
+
+  // back-relations
+  usedByNews    News[]    @relation("NewsHeroImage")
+  usedByPackage Package[] @relation("PackageHeroImage")
+}
+
+model Package {
+  id           Int      @id @default(autoincrement())
+  slug         String   @unique
+  title        String
+  summary      String
+  nights       Int?
+  priceFromGBP Int?
+  region       String?
+  // JSON instead of String[] for widest compatibility
+  features     Json
+  body         String?
+  heroEmoji    String?
+  isFeatured   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Featured image stored in DB
+  heroImageId String?    @unique
+  heroImage   NewsImage? @relation("PackageHeroImage", fields: [heroImageId], references: [id])
+
+  @@index([isFeatured, createdAt])
+  @@index([region])
+}
+
+model News {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  excerpt     String
+  content     String
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Featured image stored in DB
+  heroImageId String?    @unique
+  heroImage   NewsImage? @relation("NewsHeroImage", fields: [heroImageId], references: [id])
+
+  @@index([publishedAt])
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  quote     String
+  author    String
+  location  String?
+  createdAt DateTime @default(now())
+}
