@@ -4,24 +4,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+/* Crisp stroke-only envelope (no fill) */
 function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden {...props}>
-      <path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm9 7L3.6 7.8A1 1 0 0 0 3 7h18a1 1 0 0 0-.6.8L12 12z" fill="currentColor"/>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
+      <rect x="3" y="5" width="18" height="14" rx="2" strokeWidth={2} />
+      <path d="M3 7l9 7 9-7" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden {...props}>
-      <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" fill="currentColor"/>
+      <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" fill="currentColor" />
     </svg>
   );
 }
 function CloseIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden {...props}>
-      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -29,10 +31,8 @@ function CloseIcon(props: React.SVGProps<SVGSVGElement>) {
 export default function Header() {
   const [open, setOpen] = useState(false);
 
-  // prevent body scroll when menu is open
   useEffect(() => {
-    if (open) document.documentElement.style.overflow = "hidden";
-    else document.documentElement.style.overflow = "";
+    document.documentElement.style.overflow = open ? "hidden" : "";
     return () => { document.documentElement.style.overflow = ""; };
   }, [open]);
 
@@ -46,7 +46,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2">
           <Image alt="ViaDan logo" src="/logo-mark.svg" width={32} height={32} priority />
           <div className="leading-tight">
-            <div className="text-[17px] font-brand font-extrabold">ViaDan Travel</div>
+            <div className="text-[16px] font-brand font-extrabold">ViaDan Travel</div>
             <div className="hidden sm:block text-[11px] text-slate">Italian flair • UK based</div>
           </div>
         </Link>
@@ -63,14 +63,16 @@ export default function Header() {
 
         {/* Mobile actions */}
         <div className="md:hidden flex items-center gap-2">
-          <a href="#contact" className="btn btn-outline">Get a quote</a>
-          <a
-            href="mailto:info@viadantravel.co.uk"
-            className="btn btn-primary p-2"
-            aria-label="Email"
-          >
+          {/* Never-wrap label: short on xs, full from sm+ */}
+          <a href="#contact" className="btn btn-outline whitespace-nowrap px-3 py-2 text-[15px]">
+            <span className="sm:hidden">Quote</span>
+            <span className="hidden sm:inline">Get a quote</span>
+          </a>
+
+          <a href="mailto:info@viadantravel.co.uk" className="btn btn-primary p-2" aria-label="Email">
             <MailIcon className="h-5 w-5" />
           </a>
+
           <button
             className="btn btn-primary p-2"
             aria-label={open ? "Close menu" : "Open menu"}
