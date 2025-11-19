@@ -23,7 +23,7 @@ export default function ContactForm() {
       className="card border-2 border-[var(--teal)]/30 shadow-lg bg-gradient-to-br from-blue-50 to-white max-w-2xl"
     >
       <input type="hidden" name="_subject" value="Trip Enquiry — ViaDan" />
-      <input type="hidden" name="_redirect" value="/thank-you" />
+      <input type="hidden" name="_redirect" value="https://viadantravel.co.uk/thank-you" />
       <input type="text" name="_gotcha" className="hidden" aria-hidden />
 
       <div className="grid md:grid-cols-2 gap-3">
