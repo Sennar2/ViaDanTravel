@@ -20,7 +20,7 @@ export default function ContactForm() {
     <form
       action="https://formspree.io/f/manpkjwy"
       method="POST"
-      className="card border-2 border-transparent hover:border-[var(--teal)]/30 shadow-lg"
+      className="card border-2 border-[var(--teal)]/30 shadow-lg bg-gradient-to-br from-blue-50 to-white max-w-2xl"
     >
       <input type="hidden" name="_subject" value="Trip Enquiry — ViaDan" />
       <input type="hidden" name="_redirect" value="/thank-you" />
@@ -55,8 +55,9 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="flex flex-wrap gap-3 items-center mt-4">
-        <button className="btn btn-primary shadow-md" type="submit">Send enquiry</button>
+      <div className="flex flex-wrap gap-3 items-center mt-6">
+        <button className="btn btn-primary shadow-lg hover:shadow-xl text-base px-6 py-3" type="submit">Send enquiry</button>
+        <span className="text-sm text-slate">or</span>
         <a className="btn btn-outline" href="mailto:info@viadantravel.co.uk">Email instead</a>
       </div>
     </form>

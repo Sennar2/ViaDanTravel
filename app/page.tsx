@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ContactForm from "./components/ContactForm";
+import StickyContactButton from "./components/StickyContactButton";
+import Testimonials from "./components/Testimonials";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -64,26 +66,36 @@ export default async function Home() {
 
   return (
     <main>
+      <StickyContactButton />
+
       {/* Hero (cream/gradient background) */}
-      <section className="bg-[var(--brand-gradient)] py-16">
+      <section className="bg-[var(--brand-gradient)] py-16 md:py-20">
         <div className="container grid md:grid-cols-2 gap-8 items-center">
           <div>
             <div className="pill">From the UK • Crafted by Daniele</div>
             <h1 className="slogan text-5xl md:text-6xl lg:text-7xl mt-2 mb-3">
               Dream it. Plan it. <span className="text-coral">Live it.</span>
             </h1>
-            <p className="text-lg text-slate">
+            <p className="text-lg text-slate mb-2">
               Bespoke holidays, city breaks and honeymoons designed by an Italian in the UK.
               Personal service, exclusive partners, stress-free planning.
             </p>
-            <div className="mt-5 flex gap-3">
-              <a href="#contact" className="btn btn-primary">Plan my trip</a>
-              <a href="mailto:info@viadantravel.co.uk" className="btn btn-outline">Email us</a>
+            <div className="flex items-center gap-2 mb-5 text-sm text-slate">
+              <span>🛡️</span>
+              <span><strong>ABTA & ATOL Protected</strong> – Your booking is safe with us.</span>
+            </div>
+            <div className="mt-6 flex gap-3 flex-wrap">
+              <a href="#contact" className="btn btn-primary text-base px-6 py-3 shadow-lg hover:shadow-xl">
+                Plan my trip
+              </a>
+              <a href="mailto:info@viadantravel.co.uk" className="btn btn-outline">
+                Email us
+              </a>
             </div>
           </div>
 
           {/* Latest package (label can stay highlighted coral) */}
-          <div className="card">
+          <div className="card border-2 border-[var(--teal)]/20">
             {latest ? (
               <>
                 <span className="hi hi-coral">Latest package</span>
@@ -245,6 +257,9 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <Testimonials />
+
       {/* News (white → teal highlight on label only) */}
       <section className="py-14 bg-white border-y">
         <div className="container">
@@ -280,6 +295,10 @@ export default async function Home() {
         <div className="container">
           <span className="hi hi-coral">Start here</span>
           <h2 className="text-3xl font-brand font-bold mt-1 mb-4">Tell me about your trip</h2>
+          <p className="text-slate mb-6 max-w-2xl">
+            Fill out the form below with your travel dreams, and I'll craft the perfect itinerary for you. 
+            No pressure, no hidden fees — just personalized service.
+          </p>
           <ContactForm />
         </div>
       </section>
