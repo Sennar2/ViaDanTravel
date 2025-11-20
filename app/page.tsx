@@ -74,7 +74,7 @@ export default async function Home() {
           <div>
             <div className="pill">From the UK • Crafted by Daniele</div>
             <h1 className="slogan text-5xl md:text-6xl lg:text-7xl mt-2 mb-3">
-              Dream it. Plan it. <span className="text-coral">Live it.</span>
+              Dream it. Plan it. <span className="text-[var(--teal)]">Live it.</span>
             </h1>
             <p className="text-lg text-slate mb-2">
               Bespoke holidays, city breaks and honeymoons designed by an Italian in the UK.

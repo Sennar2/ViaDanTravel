@@ -13,7 +13,7 @@ export default function ThankYou() {
             <h1 className="font-brand text-4xl md:text-5xl font-bold mb-2 text-navy text-center">
               Grazie!
             </h1>
-            <span className="hi hi-coral text-center block mb-6">Your dream trip awaits</span>
+            <span className="hi hi-teal text-center block mb-6">Your dream trip awaits</span>
 
             {/* Main Message */}
             <p className="text-lg text-slate text-center mb-2">

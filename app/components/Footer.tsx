@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 
 function Icon({ name, className }: { name: "instagram" | "facebook" | "linkedin" | "mail"; className?: string }) {
@@ -34,32 +33,29 @@ function Icon({ name, className }: { name: "instagram" | "facebook" | "linkedin"
 export default function Footer() {
   const year = new Date().getFullYear();
 
+  const socialLinks = [
+    { name: "instagram", href: "https://instagram.com/viadantravel", label: "Instagram" },
+    { name: "facebook", href: "https://facebook.com/", label: "Facebook" },
+    { name: "linkedin", href: "https://linkedin.com/", label: "LinkedIn" },
+  ];
+
   return (
-    <footer className="mt-12 border-t bg-cream text-navy">
+    <footer className="mt-16 border-t border-gray-200 bg-white text-navy">
       <div className="container">
-
         {/* ===== MOBILE LAYOUT ===== */}
-        <div className="md:hidden py-8 flex flex-col items-center gap-6">
-
-          {/* 1) Accreditations centered */}
-          <div className="flex flex-col items-center gap-2">
-            <div className="flex items-center gap-6">
-              <Image src="/logos/abta.svg" alt="ABTA" width={84} height={34} />
-              <Image src="/logos/atol.svg" alt="ATOL" width={84} height={34} />
-            </div>
-            <div className="text-xs text-slate">ABTA No. 111222 • ATOL No. 111222</div>
+        <div className="md:hidden py-12 flex flex-col items-center gap-8">
+          {/* Logo/Brand */}
+          <div className="text-center">
+            <h3 className="text-2xl font-brand font-bold text-navy mb-1">ViaDan Travel</h3>
+            <p className="text-sm text-slate">Italian flair • UK based</p>
           </div>
 
-          {/* 2) Social + email ICON only */}
-          <div className="flex items-center justify-center gap-3">
-            {[
-              { name: "instagram", href: "https://instagram.com/viadantravel", label: "Instagram" },
-              { name: "facebook", href: "https://facebook.com/", label: "Facebook" },
-              { name: "linkedin", href: "https://linkedin.com/", label: "LinkedIn" },
-            ].map((s) => (
+          {/* Social Links */}
+          <div className="flex items-center justify-center gap-4">
+            {socialLinks.map((s) => (
               <a
                 key={s.label}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border bg-white text-[var(--teal)] hover:bg-[rgba(18,181,164,0.08)] transition"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-300 bg-white text-[var(--teal)] hover:bg-[var(--teal)] hover:text-white hover:border-[var(--teal)] transition-all duration-200"
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
@@ -68,9 +64,8 @@ export default function Footer() {
                 <Icon name={s.name as any} />
               </a>
             ))}
-            {/* Mail icon (no text) */}
             <a
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--navy)] text-white hover:opacity-90 transition"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[var(--navy)] text-white hover:bg-[var(--teal)] transition-all duration-200"
               href="mailto:info@viadantravel.co.uk"
               aria-label="Email"
             >
@@ -78,72 +73,184 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* 3) Credits centered */}
-          <div className="text-center text-xs text-slate">
-            © {year} ViaDan Travel • London, UK<br className="block" />
+          {/* Accreditations */}
+          <div className="text-center">
+            <p className="text-xs font-semibold text-slate mb-3 uppercase tracking-wide">Trusted by</p>
+            <div className="flex items-center justify-center gap-6">
+              {/* ABTA Logo */}
+              <a 
+                href="https://www.abta.com" 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:opacity-80 transition"
+                aria-label="ABTA Member"
+              >
+                <svg className="h-12 w-auto" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="100" height="60" fill="#003366" rx="4"/>
+                  <text x="50" y="38" fontFamily="Arial, sans-serif" fontSize="24" fontWeight="bold" fill="white" textAnchor="middle">ABTA</text>
+                </svg>
+              </a>
+              {/* ATOL Logo */}
+              <a 
+                href="https://www.atol.org.uk" 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:opacity-80 transition"
+                aria-label="ATOL Protected"
+              >
+                <svg className="h-12 w-auto" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="100" height="60" fill="#1e40af" rx="4"/>
+                  <text x="50" y="38" fontFamily="Arial, sans-serif" fontSize="20" fontWeight="bold" fill="white" textAnchor="middle">ATOL</text>
+                </svg>
+              </a>
+            </div>
+            <p className="text-xs text-slate mt-2">ABTA No. 111222 • ATOL No. 111222</p>
+          </div>
+
+          {/* Contact Info */}
+          <div className="text-center border-t border-gray-200 pt-6 w-full">
+            <p className="text-sm font-semibold text-navy mb-2">Get in touch</p>
+            <a 
+              href="mailto:info@viadantravel.co.uk" 
+              className="text-sm text-[var(--teal)] hover:underline"
+            >
+              info@viadantravel.co.uk
+            </a>
+          </div>
+
+          {/* Credits */}
+          <div className="text-center text-xs text-slate border-t border-gray-200 pt-6 w-full">
+            <p>© {year} ViaDan Travel • London, UK</p>
+            <p className="mt-1">
+              Made by{" "}
+              <a
+                className="text-[var(--teal)] hover:underline"
+                href="https://honeysucklesdesign.uk"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Honeysuckles Design
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* ===== DESKTOP LAYOUT ===== */}
+        <div className="hidden md:grid md:grid-cols-4 gap-12 py-14">
+          {/* Brand Column */}
+          <div>
+            <h3 className="text-xl font-brand font-bold text-navy mb-2">ViaDan Travel</h3>
+            <p className="text-sm text-slate mb-4">Italian flair • UK based</p>
+            <p className="text-sm text-slate leading-relaxed">
+              Bespoke travel experiences crafted with personal service and exclusive partnerships.
+            </p>
+          </div>
+
+          {/* Connect Column */}
+          <div>
+            <h4 className="text-sm font-semibold text-navy mb-4 uppercase tracking-wide">Connect</h4>
+            <div className="space-y-3">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  className="flex items-center gap-2 text-sm text-slate hover:text-[var(--teal)] transition"
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Icon name={s.name as any} className="h-4 w-4" />
+                  {s.label}
+                </a>
+              ))}
+              <a
+                className="flex items-center gap-2 text-sm text-slate hover:text-[var(--teal)] transition"
+                href="mailto:info@viadantravel.co.uk"
+              >
+                <Icon name="mail" className="h-4 w-4" />
+                Email us
+              </a>
+            </div>
+          </div>
+
+          {/* Trust Column */}
+          <div>
+            <h4 className="text-sm font-semibold text-navy mb-4 uppercase tracking-wide">Trust & Safety</h4>
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs text-slate mb-2">Protected by</p>
+                <div className="flex gap-3">
+                  {/* ABTA Logo */}
+                  <a 
+                    href="https://www.abta.com" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="hover:opacity-80 transition"
+                    aria-label="ABTA Member"
+                  >
+                    <svg className="h-10 w-auto" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="100" height="60" fill="#003366" rx="4"/>
+                      <text x="50" y="38" fontFamily="Arial, sans-serif" fontSize="20" fontWeight="bold" fill="white" textAnchor="middle">ABTA</text>
+                    </svg>
+                  </a>
+                  {/* ATOL Logo */}
+                  <a 
+                    href="https://www.atol.org.uk" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="hover:opacity-80 transition"
+                    aria-label="ATOL Protected"
+                  >
+                    <svg className="h-10 w-auto" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="100" height="60" fill="#1e40af" rx="4"/>
+                      <text x="50" y="38" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" fill="white" textAnchor="middle">ATOL</text>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div className="text-xs text-slate">
+                <p>ABTA No. 111222</p>
+                <p>ATOL No. 111222</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Info Column */}
+          <div>
+            <h4 className="text-sm font-semibold text-navy mb-4 uppercase tracking-wide">Info</h4>
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs text-slate uppercase tracking-wide mb-1">Email</p>
+                <a 
+                  href="mailto:info@viadantravel.co.uk" 
+                  className="text-sm text-[var(--teal)] hover:underline"
+                >
+                  info@viadantravel.co.uk
+                </a>
+              </div>
+              <div>
+                <p className="text-xs text-slate uppercase tracking-wide mb-1">Location</p>
+                <p className="text-sm text-slate">London, UK</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-200 py-6 text-center md:text-left md:flex md:items-center md:justify-between">
+          <p className="text-xs text-slate">
+            © {year} ViaDan Travel. All rights reserved.
+          </p>
+          <p className="text-xs text-slate mt-3 md:mt-0">
             Made by{" "}
             <a
-              className="underline text-[var(--teal)]"
+              className="text-[var(--teal)] hover:underline"
               href="https://honeysucklesdesign.uk"
               target="_blank"
               rel="noreferrer"
             >
               Honeysuckles Design
             </a>
-          </div>
-        </div>
-
-        {/* ===== DESKTOP LAYOUT (unchanged style) ===== */}
-        <div className="hidden md:grid md:grid-cols-3 gap-8 py-10">
-          {/* Social + Email text */}
-          <div className="space-y-3">
-            <div className="text-lg font-semibold text-[var(--teal)]">Stay in touch</div>
-            <div className="flex items-center gap-3">
-              {[
-                { name: "instagram", href: "https://instagram.com/viadantravel", label: "Instagram" },
-                { name: "facebook", href: "https://facebook.com/", label: "Facebook" },
-                { name: "linkedin", href: "https://linkedin.com/", label: "LinkedIn" },
-              ].map((s) => (
-                <a
-                  key={s.label}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border bg-white text-[var(--teal)] hover:bg-[rgba(18,181,164,0.08)] transition"
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={s.label}
-                >
-                  <Icon name={s.name as any} />
-                </a>
-              ))}
-            </div>
-            <div className="text-sm text-slate">
-              Email:{" "}
-              <a href="mailto:info@viadantravel.co.uk" className="underline text-[var(--teal)]">
-                info@viadantravel.co.uk
-              </a>
-            </div>
-          </div>
-
-          {/* Accreditations */}
-          <div className="flex flex-col gap-3">
-            <div className="text-lg font-semibold text-[var(--teal)]">Accreditations</div>
-            <div className="flex items-center gap-6">
-              <Image src="/logos/abta.svg" alt="ABTA" width={90} height={36} />
-              <Image src="/logos/atol.svg" alt="ATOL" width={90} height={36} />
-            </div>
-            <div className="text-xs text-slate">ABTA No. 111222 • ATOL No. 111222</div>
-          </div>
-
-          {/* Credits */}
-          <div className="md:text-right text-sm text-slate">
-            <div>© {year} ViaDan Travel • London, UK</div>
-            <div className="mt-2">
-              Made by{" "}
-              <a className="underline text-[var(--teal)]" href="https://honeysucklesdesign.uk" target="_blank" rel="noreferrer">
-                Honeysuckles Design
-              </a>
-            </div>
-          </div>
+          </p>
         </div>
       </div>
     </footer>
