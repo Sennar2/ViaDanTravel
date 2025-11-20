@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import ContactForm from "./components/ContactForm";
 import StickyContactButton from "./components/StickyContactButton";
 import Testimonials from "./components/Testimonials";
+import InstagramFeed from "./components/InstagramFeed";
+import TravelAdviceFeed from "./components/TravelAdviceFeed";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -287,6 +289,25 @@ export default async function Home() {
           <div className="mt-4">
             <Link className="btn btn-outline" href="/news">See all news</Link>
           </div>
+        </div>
+      </section>
+
+      {/* Instagram Feed Section */}
+      <section className="py-14 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div className="container">
+          <InstagramFeed />
+        </div>
+      </section>
+
+      {/* Travel Advice Feed Section */}
+      <section className="py-14 bg-white border-y">
+        <div className="container">
+          <span className="hi hi-teal">Travel news</span>
+          <h2 className="text-3xl font-brand font-bold mt-1 mb-6">Latest FCDO travel updates</h2>
+          <p className="text-slate mb-6 max-w-2xl">
+            Stay informed with the latest travel advice and updates from the UK Foreign, Commonwealth & Development Office (FCDO).
+          </p>
+          <TravelAdviceFeed />
         </div>
       </section>
 
